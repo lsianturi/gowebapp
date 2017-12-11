@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/grisha/gowebapp/model"
+	"github.com/lsianturi/gowebapp/model"
 )
 
 type Config struct {
@@ -62,13 +62,13 @@ func peopleHandler(m *model.Model) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		people, err := m.People()
 		if err != nil {
-			http.Error(w, "This is an error", http.StatusBadRequest)
+			http.Error(w, "This is an error: "+err.Error(), http.StatusBadRequest)
 			return
 		}
 
 		js, err := json.Marshal(people)
 		if err != nil {
-			http.Error(w, "This is an error", http.StatusBadRequest)
+			http.Error(w, "This is an error"+err.Error(), http.StatusBadRequest)
 			return
 		}
 		fmt.Fprintf(w, string(js))

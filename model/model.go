@@ -6,7 +6,7 @@ type Model struct {
 
 func New(db db) *Model  {
 	return &Model {
-		db: db
+		db: db,
 	}
 }
 
